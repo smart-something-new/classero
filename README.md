@@ -1,6 +1,6 @@
 # Classero — сайт
 
-Лендинг Classero: https://smart-something-new.github.io/classero/
+Лендинг Classero: https://classero.ru/
 
 Сайт статичный и публикуется через GitHub Pages из ветки `main`.
 Заявки из форм отправляются на Netlify (https://classero.netlify.app/forms.html):

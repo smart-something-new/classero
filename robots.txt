@@ -1,4 +1,4 @@
+# Временно закрыто от индексации до официального запуска.
+# Чтобы открыть: заменить "Disallow: /" на "Allow: /" и вернуть строку Sitemap.
 User-agent: *
-Allow: /
-
-Sitemap: https://smart-something-new.github.io/classero/sitemap.xml
+Disallow: /
