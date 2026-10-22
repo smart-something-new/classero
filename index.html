@@ -204,8 +204,9 @@
   }else if(lessonPreview&&matchingGrid){renderLessonTask(lessonTasks[0],true);lessonPreview.classList.add('demo-feedback')}
   const coursePrompt=document.getElementById('coursePrompt'),courseIdea=document.getElementById('courseIdea');
   document.querySelectorAll('.prompt-example').forEach(example=>example.addEventListener('click',()=>{courseIdea.value=example.dataset.prompt;courseIdea.focus()}));
-  // Заявки принимает Netlify (classero.netlify.app): там письмо на почту и CRM.
-  const FORMS_ENDPOINT='https://classero.netlify.app/forms.html';
+  // Заявки принимает Google Apps Script: строка в таблице «Заявки Classero», уведомление на hello@,
+  // автоответ от hello@ через GitHub Actions (репозиторий classero-mailer).
+  const FORMS_ENDPOINT='https://script.google.com/macros/s/AKfycbzbUC28_c5Lm9CI4_tjGD7lRdSl04m_HD5XauQ7CBe-4dljz9FMpSDMVHxt1PiDh34FoA/exec';
   const sendForm=form=>fetch(FORMS_ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(form))});
   coursePrompt?.addEventListener('submit',e=>{e.preventDefault();const button=e.currentTarget.querySelector('.ai-submit');if(button.dataset.ready){location.hash='start';return}const accessIdea=document.getElementById('accessCourseIdea');if(accessIdea)accessIdea.value=courseIdea.value;sendForm(e.currentTarget).catch(()=>{});e.currentTarget.querySelector('.ai-result').classList.add('visible');button.textContent='Запросить ранний доступ →';button.dataset.ready='true'});
   document.getElementById('communityForm')?.addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget,button=form.querySelector('button'),status=form.querySelector('.community-status'),label=button.textContent;button.disabled=true;button.textContent='Отправляем…';sendForm(form).then(()=>{button.textContent='Вы в списке ✓';status.textContent='Спасибо! Мы скоро свяжемся с вами и добавим в закрытый чат комьюнити.'}).catch(()=>{button.disabled=false;button.textContent=label;status.textContent='Не удалось отправить. Проверьте интернет и попробуйте ещё раз.'}).finally(()=>status.style.display='block')});
